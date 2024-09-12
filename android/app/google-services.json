@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "729182707947",
+    "project_id": "new-diary-b659c",
+    "storage_bucket": "new-diary-b659c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729182707947:android:e44166b3b5e1fe5b531eae",
+        "android_client_info": {
+          "package_name": "com.diary.crud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDme986obrBIflqyW6tvylJYsektlhrCI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
