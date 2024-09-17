@@ -15,7 +15,7 @@ class _HomePostDetailsState extends State<HomePostDetails> {
     return Scaffold(
       appBar: AppBar(
         // title: Text(widget.value['name']!, style: TextStyle(color: Colors.white70)),
-        title: Text('${widget.value['title']}', style: TextStyle(color: Colors.white70)),
+        title: Text('${widget.value['title']}', style: const TextStyle(color: Colors.white70)),
         backgroundColor: Colors.lightBlue,
       ),
       body: Column(

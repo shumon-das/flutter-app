@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crud/models/user_model.dart';
 
 class FirestoreSerivce {
   final CollectionReference data = FirebaseFirestore.instance.collection('test');
@@ -41,5 +42,27 @@ class FirestoreSerivce {
       'name': values['name'],
       'skills': values['skills'],
     });
+  }
+
+  final CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Future addUser(UserModel userModel) async {
+    return users.add({
+      'name': userModel.getName,
+      'email': userModel.getEmail,
+      'contact': userModel.getContact,
+      'password': userModel.getPassword,
+      'role': userModel.getRole,
+      'image': userModel.getImage,
+      'description': userModel.getDescription,
+      'followers': userModel.followers,
+      'favourites': userModel.favourites,
+      'createdAt': userModel.getCreatedAt,
+      'isDeleted': userModel.getIsDeleted,
+    });
+  }
+
+  Stream<QuerySnapshot> getUsers() {
+    final dataStream = users.orderBy('createdAt', descending: true).snapshots();
+    return dataStream;
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crud/services/file_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,6 +12,7 @@ class ImageToText extends StatefulWidget {
 }
 
 class _ImageToTextState extends State<ImageToText> {
+  final FileUpload fileUpload = FileUpload();
   File? selectedImage;
   final picker = ImagePicker();
 
@@ -22,6 +24,7 @@ class _ImageToTextState extends State<ImageToText> {
     setState(() {
       if (pickedImage != null) {
         selectedImage = File(pickedImage.path);
+        fileUpload.uploadToFirebase(selectedImage, '${DateTime.now().microsecondsSinceEpoch}.png');
       } else {
         print("No Image");
       }

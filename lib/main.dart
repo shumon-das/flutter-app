@@ -22,6 +22,26 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      home: Home(),
+      // home: ImageToText(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   static List pages = [
     {'title': 'হোম', 'icon': const Icon(Icons.home), 'page': const HomePage()},
     {'title': 'বিনোদন', 'icon': const Icon(Icons.movie), 'page': const EntertainmentPage()},
@@ -30,7 +50,6 @@ class MyApp extends StatelessWidget {
     {'title': 'আপনি', 'icon': const Icon(Icons.person_pin), 'page': const ProfilePage()},
   ];
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -78,58 +97,3 @@ Widget homeNavigation({required List<dynamic> pages}) {
     ),
   );
 }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key});
-//
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-//
-// class _MyHomePageState extends State<MyHomePage> {
-//    int bnbSelectedIndex = 0;
-//
-//   static const data = <Widget>[
-//     HomePage(),
-//     JobsPage(),
-//     LiteraturePage(),
-//     EntertainmentPage(),
-//     ProfilePage(),
-//   ];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-//         title: const Text('CRUD'),
-//         actions: [
-//           TextButton(
-//               onPressed: () {
-//                 Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHome()));
-//               },
-//               child: const Text('Admin')),
-//         ],
-//       ),
-//       body: data[bnbSelectedIndex],
-//       bottomNavigationBar: BottomNavigationBar(
-//         type: BottomNavigationBarType.fixed,
-//         items: const <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home', backgroundColor: Colors.deepPurple),
-//           BottomNavigationBarItem(icon: Icon(Icons.accessibility_sharp), label: 'Jobs', backgroundColor: Colors.deepPurple),
-//           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Literature', backgroundColor: Colors.deepPurple),
-//           BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Entertain', backgroundColor: Colors.deepPurple),
-//           BottomNavigationBarItem(icon: Icon(Icons.person_pin), label: 'Profile', backgroundColor: Colors.deepPurple),
-//         ],
-//         selectedItemColor: Colors.red,
-//         unselectedItemColor: Colors.black,
-//         currentIndex: bnbSelectedIndex,
-//         onTap: (int index) {
-//             setState(() {
-//               bnbSelectedIndex = index;
-//             });
-//         },
-//       ),
-//     );
-//   }
-// }

@@ -39,6 +39,11 @@ dependencies:
   cloud_firestore: ^5.4.0
   one_clock: ^2.0.1
   image_picker: ^1.1.2
+  firebase_storage: ^12.3.0
+  fluttertoast: ^8.2.8
+  email_validator: ^3.0.0
+  crypto: ^3.0.5
+  expansion_tile_card: ^3.0.0
 
 dev_dependencies:
   flutter_test:
