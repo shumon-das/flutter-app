@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:crud/models/user_model.dart';
+import 'package:crud/pages/Admin/users_list.dart';
 import 'package:crud/services/encryption.dart';
 import 'package:crud/services/firestore.dart';
 import 'package:email_validator/email_validator.dart';
@@ -187,13 +188,17 @@ class _AddNewUserState extends State<AddNewUser> {
 
                 const SizedBox(height: 20),
                 FilledButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_userFormGlobalKey.currentState!.validate()) {
                         String imgName = '${DateTime.now().microsecondsSinceEpoch}.png';
-                        userModel.setImage = imgName;
-                        fileUpload.uploadToFirebase(selectedImage, imgName);
+                        userModel.setImage = await fileUpload.uploadToFirebase(selectedImage, imgName);
                         firestoreSerivce.addUser(userModel);
                         Fluttertoast.showToast(msg: 'New user created successfully');
+                        if (context.mounted) {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => const UsersList()
+                          ));
+                        }
                       }
                       else {
                         ScaffoldMessenger.of(context).showSnackBar(

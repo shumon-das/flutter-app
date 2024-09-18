@@ -37,7 +37,16 @@ class _UsersListState extends State<UsersList> {
                   DateTime created = createdAt.toDate();
 
                   return ExpansionTileCard(
-                      trailing: const Icon(Icons.person),
+                      trailing: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(user['image']),
+                          ),
+                          borderRadius: BorderRadius.circular(50)
+                        ),
+                      ),
                       title: Text(user['name']),
                       subtitle: Text(
                         user['role'],

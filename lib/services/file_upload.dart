@@ -1,24 +1,18 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class FileUpload {
-  uploadToFirebase(file, imgName) {
+  Future<String> uploadToFirebase(file, imgName) async {
     try {
-      Reference sr = FirebaseStorage.instance.ref().child(
-        'Images/$imgName'
-      );
-
-      sr.putFile(file).whenComplete(() => {
-        Fluttertoast.showToast(msg: 'File Uploaded')
-      });
-      // final downloadUrl = await (
-      //     await FirebaseStorage.instance
-      //     .ref('images/$imgName')
-      //     .putFile(file))
-      //     .ref
-      //     .getDownloadURL();
+      final downloadUrl = await (
+          await FirebaseStorage.instance
+          .ref('images/$imgName')
+          .putFile(file))
+          .ref
+          .getDownloadURL();
+      return downloadUrl;
     } catch (e) {
       print('File upload error is: $e');
+      return 'File upload error is: $e';
     }
   }
 }
