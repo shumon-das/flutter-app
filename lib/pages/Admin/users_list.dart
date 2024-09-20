@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crud/common/search_page.dart';
+import 'package:crud/pages/Admin/add_new_user.dart';
 import 'package:crud/services/firestore.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,32 @@ class _UsersListState extends State<UsersList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Users List'),
+        leading: IconButton(
+            style: IconButton.styleFrom(
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => const AddNewUser(userData: {},))
+              );
+            },
+            icon: const Icon(Icons.add)
+        ),
+        title:const Text('Users List'),
         backgroundColor: Colors.lightBlue,
+        actions: [
+          IconButton(
+            style: IconButton.styleFrom(
+              foregroundColor: Colors.white
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => const SearchPage())
+              );
+            },
+            icon: const Icon(Icons.search)
+          ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: firestoreSerivce.getUsers(),
@@ -35,19 +61,34 @@ class _UsersListState extends State<UsersList> {
                   Map<String, dynamic> user = document.data() as Map<String, dynamic>;
                   Timestamp createdAt = user['createdAt'];
                   DateTime created = createdAt.toDate();
+                  // String? userImage = user['image'];
 
                   return ExpansionTileCard(
-                      trailing: Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(user['image']),
-                          ),
-                          borderRadius: BorderRadius.circular(50)
-                        ),
+                      trailing: IconButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => AddNewUser(userData: user))
+                            );
+                          },
+                          icon: const Icon(Icons.edit)
                       ),
-                      title: Text(user['name']),
+                      title: Row(
+                        children: [
+                          // ClipRRect(
+                          //   borderRadius: BorderRadius.circular(50.0),
+                          //   child: Image.network(
+                          //     user['image'],
+                          //     errorBuilder: (context, error, stackTrace) => Image.asset(
+                          //       'assets/images/default-user-icon.png', width: 50, height: 50,
+                          //     ),
+                          //     width: 50,
+                          //     height: 50,
+                          //   ),
+                          // ),
+                          // const SizedBox(width: 10),
+                          Text(user['name']),
+                        ],
+                      ),
                       subtitle: Text(
                         user['role'],
                         style: const TextStyle(
@@ -55,6 +96,14 @@ class _UsersListState extends State<UsersList> {
                         ),
                       ),
                       children: [
+                        Row(
+                          children: [
+                            const SizedBox(width: 20),
+                            const Text('Desc: '),
+                            const SizedBox(width: 5),
+                            Text(user['description'] ?? '-'),
+                          ],
+                        ),
                         Row(
                           children: [
                             const SizedBox(width: 20),
@@ -80,11 +129,29 @@ class _UsersListState extends State<UsersList> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        const OverflowBar(
+                        OverflowBar(
                           children: [
-                            Icon(Icons.add),
-                            Icon(Icons.add_a_photo),
-                            Icon(Icons.add_alarm),
+                            Row(
+                              children: [
+                                const SizedBox(width: 25),
+                                const Icon(Icons.people_alt_outlined),
+                                const SizedBox(width: 5),
+                                const Text('Followers: '),
+                                Text('${user['followers'].length}'),
+
+                                const SizedBox(width: 20),
+                                const Icon(Icons.add_box_sharp),
+                                const SizedBox(width: 5),
+                                const Text('Writes: '),
+                                Text('${user['writes'].length}'),
+
+                                const SizedBox(width: 20),
+                                const Icon(Icons.read_more),
+                                const SizedBox(width: 5),
+                                const Text('Reads: '),
+                                Text('${user['reads'].length}'),
+                              ],
+                            ),
                           ],
                         ),
                       ],

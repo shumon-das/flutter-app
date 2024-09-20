@@ -13,7 +13,10 @@ import 'package:path/path.dart';
 import '../../services/file_upload.dart';
 
 class AddNewUser extends StatefulWidget {
-  const AddNewUser({super.key});
+  final Map<String, dynamic> userData;
+
+  const AddNewUser({super.key, required this.userData});
+
 
   @override
   State<AddNewUser> createState() => _AddNewUserState();
@@ -70,6 +73,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
                 const SizedBox(height: 20),
                 TextFormField(
+                  initialValue: '${widget.userData.isNotEmpty ? widget.userData['name'] : ''}',
                   maxLength: 50,
                   decoration: const InputDecoration(
                     label: Text('Name')
@@ -86,6 +90,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
                 const SizedBox(height: 20),
                 TextFormField(
+                  initialValue: '${widget.userData.isNotEmpty ? widget.userData['email'] : ''}',
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     label: Text('Email')
@@ -106,6 +111,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
                 const SizedBox(height: 20),
                 TextFormField(
+                  initialValue: '${widget.userData.isNotEmpty ? widget.userData['contact'] : ''}',
                   maxLength: 14,
                   decoration: const InputDecoration(
                     label: Text('Contact'),
@@ -158,7 +164,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
                 const SizedBox(height: 20),
                 DropdownButtonFormField(
-                    value: userModel.getRole,
+                    value: '${widget.userData.isNotEmpty ? widget.userData['role'] : userModel.getRole}',
                     decoration: const InputDecoration(
                       label: Text('Select User Role')
                     ),
@@ -177,6 +183,7 @@ class _AddNewUserState extends State<AddNewUser> {
 
                 const SizedBox(height: 20),
                 TextFormField(
+                  initialValue: '${widget.userData.isNotEmpty ? widget.userData['description'] : ''}',
                   maxLength: 200,
                   decoration: const InputDecoration(
                     label: Text('Description')
@@ -190,8 +197,7 @@ class _AddNewUserState extends State<AddNewUser> {
                 FilledButton(
                     onPressed: () async {
                       if (_userFormGlobalKey.currentState!.validate()) {
-                        String imgName = '${DateTime.now().microsecondsSinceEpoch}.png';
-                        userModel.setImage = await fileUpload.uploadToFirebase(selectedImage, imgName);
+                        userModel.setImage = await fileUpload.uploadToFirebase(selectedImage);
                         firestoreSerivce.addUser(userModel);
                         Fluttertoast.showToast(msg: 'New user created successfully');
                         if (context.mounted) {

@@ -63,6 +63,10 @@ class _HomeState extends State<Home> {
               title: const Text('CRUD'),
               actions: [
                 TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.pink,
+                      backgroundColor: Colors.white
+                    ),
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminHome()));
                     },

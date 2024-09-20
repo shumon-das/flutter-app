@@ -54,8 +54,10 @@ class FirestoreSerivce {
       'role': userModel.getRole,
       'image': userModel.getImage,
       'description': userModel.getDescription,
-      'followers': userModel.followers,
-      'favourites': userModel.favourites,
+      'followers': userModel.getFollowers,
+      'favourites': userModel.getFavourites,
+      'reads': userModel.getReads,
+      'writes': userModel.getWrites,
       'createdAt': userModel.getCreatedAt,
       'isDeleted': userModel.getIsDeleted,
     });

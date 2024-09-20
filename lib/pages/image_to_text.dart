@@ -24,7 +24,7 @@ class _ImageToTextState extends State<ImageToText> {
     setState(() {
       if (pickedImage != null) {
         selectedImage = File(pickedImage.path);
-        fileUpload.uploadToFirebase(selectedImage, '${DateTime.now().microsecondsSinceEpoch}.png');
+        fileUpload.uploadToFirebase(selectedImage);
       } else {
         print("No Image");
       }

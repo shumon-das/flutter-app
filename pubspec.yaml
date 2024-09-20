@@ -44,6 +44,7 @@ dependencies:
   email_validator: ^3.0.0
   crypto: ^3.0.5
   expansion_tile_card: ^3.0.0
+  flutter_image_compress: ^2.3.0
 
 dev_dependencies:
   flutter_test:

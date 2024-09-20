@@ -10,6 +10,8 @@ class UserModel {
   String _description = '';
   List followers = [];
   List favourites = [];
+  List reads = [];
+  List writes = [];
   Timestamp createdAt = Timestamp.now();
   Timestamp? updatedAt;
   String? updatedBy;
@@ -93,6 +95,20 @@ class UserModel {
   }
   set setFavourites(List values) {
     favourites = values;
+  }
+
+  List get getReads {
+    return reads;
+  }
+  set setReads(List values) {
+    reads = values;
+  }
+
+  List get getWrites {
+    return writes;
+  }
+  set setWrites(List values) {
+    writes = values;
   }
 
   Timestamp get getCreatedAt {
